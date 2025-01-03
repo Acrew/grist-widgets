@@ -1,15 +1,15 @@
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.grist) {
+    error("Cette vue nécessite Grist pour fonctionner");
+  }
+  document.getElementById('alert').style.display = 'none';
+  displaySection('droits');
+});
+
 grist.ready({
     requiredTables: ['Associations', 'Contacts'],
     requiredAccess: 'read table',
     allowSelectBy: true
-});
-
-displaySection('droits');
-
-grist.onRecords(function (records) {
-    if(!records){
-        displaySection('droits');
-    }
 });
   
 grist.onRecord(function(record) {
@@ -88,6 +88,11 @@ function displaySection(section) {
             document.getElementById('section-' + s).style.display = 'none';
         }
     });
+}
+
+function error(msg) {
+  document.getElementById('alert-message').innerHTML(msg);
+  document.getElementById('alert').style.display = 'block';
 }
 
 function updateRecord(record, data) {
