@@ -12,7 +12,29 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <div class="container p-3">
+    <div class="container p-3" id="section-droits">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p>Cette vue a besoin d'accéder aux données des associations.<br/>
+            Veuillez activer les droits "Lire des données source sélectionnées" dans les options de la vue.</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="container p-3" id="section-rna">
+        <div class="card">
+            <div class="card-body">
+            <h2 class="card-title fs-4">Code RNA</h2>
+            <p>Cette association n'a pas de RNA. Merci de consulter le journal officiel et de le renseigner.</p>
+            <p><a href="#" class="btn btn-secondary" target="_blank" id="btn-jo">Journal officiel</a></p>
+            <div class="input-group">
+                <input class="form-control" placeholder="RNA" id="input-rna"/>
+                <button class="btn btn-outline-primary" type="button" id="btn-rna">Valider</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-3"  id="section-asso">
         <div class="card" id="card-asso">
             <div class="card-body">
             <div class="d-flex justify-content-between align-items-start">
@@ -25,25 +47,9 @@
             <p id="section-contacts">Contacts : <span id="asso-contacts"></span></p>
             </div>
         </div>
+    </div>
 
-        <div class="card" id="card-rna">
-            <div class="card-body">
-            <h2 class="card-title fs-4">Code RNA</h2>
-            <p>Cette association n'a pas de RNA. Merci de consulter le journal officiel et de le renseigner.</p>
-            <p><a href="#" class="btn btn-secondary" target="_blank" id="btn-jo">Journal officiel</a></p>
-            <div class="input-group">
-                <input class="form-control" placeholder="RNA" id="input-rna"/>
-                <button class="btn btn-outline-primary" type="button" id="btn-rna">Valider</button>
-            </div>
-            </div>
-        </div>
-
-        <!--
-        <div class="alert alert-dismissible fade show" role="alert" id="alert-doc">
-            <span></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        -->
+    <div class="container p-3">
         <pre id="debug"></pre>
     </div>
 </body>

@@ -1,12 +1,21 @@
 grist.ready({
-    requiredTables: ['Associations', 'Contacts']
+    requiredTables: ['Associations', 'Contacts'],
+    requiredAccess: 'read table',
+    allowSelectBy: true
+});
+
+displaySection('droits');
+
+grist.onRecords(function (records) {
+    if(!records){
+        displaySection('droits');
+    }
 });
   
 grist.onRecord(function(record) {
     Object.assign(record, record.API);
   
-    document.getElementById('card-asso').style.display = 'none';
-    document.getElementById('card-rna').style.display = 'none';
+    displaySection('asso');
   
     if(!record.RNA) {
       document.getElementById("btn-jo").setAttribute('href','https://www.journal-officiel.gouv.fr/pages/associations-recherche/?disjunctive.source&sort=cronosort&q=' + record.Nom);
@@ -15,10 +24,10 @@ grist.onRecord(function(record) {
           RNA: document.getElementById("input-rna").value
         });
         
-        document.getElementById('card-rna').style.display = 'none';
+        displaySection('asso');
       });
   
-      document.getElementById('card-rna').style.display = 'block';
+      displaySection('rna');
     }else{
       document.getElementById("asso-nom").textContent = record.Nom;
       document.getElementById("asso-categorie").textContent = record.Categorie;
@@ -59,9 +68,9 @@ grist.onRecord(function(record) {
     }
     
     //document.getElementById('debug').innerHTML = JSON.stringify(record, null, 2);
-  });
+});
   
-  function getColor(text) {
+function getColor(text) {
     const colors = {
       'patriotique': 'danger',
       'sportive': 'success',
@@ -69,9 +78,19 @@ grist.onRecord(function(record) {
       'diverse': 'warning'
     };
     return colors[text.toLowerCase()] || 'primary';
-  }
-  
-  function updateRecord (record, data) {
+}
+
+function displaySection(section) {
+    ['droits','rna','asso'].forEach((s) => {
+        if(section == s) {
+            document.getElementById('section-' + s).style.display = 'block';
+        }else{
+            document.getElementById('section-' + s).style.display = 'none';
+        }
+    });
+}
+
+function updateRecord(record, data) {
     grist
       .getTable()
       .getTableId()
@@ -85,4 +104,4 @@ grist.onRecord(function(record) {
             console.error("Failed to update record", err);
           });
       });
-  };
+};
