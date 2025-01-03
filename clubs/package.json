@@ -2,7 +2,7 @@
     "name": "@plouezec/widget-clubs",
     "description": "Facilite le traitement des données des associations.",
     "homePage": "https://github.com/Acrew/grist-widgets",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "grist": [
       {
         "name": "Associations",
@@ -19,7 +19,7 @@
           }
         ],
         "isGristLabsMaintained": false,
-        "lastUpdatedAt": "2025-01-03T11:18:00+01:00"
+        "lastUpdatedAt": "2025-01-03T16:44:00+01:00"
       }
     ]
   }

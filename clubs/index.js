@@ -81,7 +81,8 @@ function getColor(text) {
 }
 
 function displaySection(section) {
-    ['droits','rna','asso'].forEach((s) => {
+    const sections = ['droits','rna','asso'];
+    sections.forEach((s) => {
         if(section == s) {
             document.getElementById('section-' + s).style.display = 'block';
         }else{
