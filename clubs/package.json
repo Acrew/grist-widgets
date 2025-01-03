@@ -1,0 +1,25 @@
+{
+    "name": "@plouezec/widget-clubs",
+    "description": "Facilite le traitement des données des associations.",
+    "homePage": "https://github.com/Acrew/grist-widgets",
+    "version": "0.0.1",
+    "grist": [
+      {
+        "name": "Associations",
+        "url": "https://acrew.github.io/grist-widgets/clubs/index.html",
+        "widgetId": "@plouezec/widget-clubs",
+        "published": true,
+        "accessLevel": "read table",
+        "renderAfterReady": true,
+        "description": "Facilite le traitement des données des associations.",
+        "authors": [
+          {
+            "name": "Pierre Wellecan",
+            "url": "https://github.com/Acrew"
+          }
+        ],
+        "isGristLabsMaintained": false,
+        "lastUpdatedAt": "2025-01-03T11:18:00+01:00"
+      }
+    ]
+  }
