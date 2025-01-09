@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 grist.ready({
     requiredTables: ['Associations', 'Contacts'],
-    requiredAccess: 'read table',
+    requiredAccess: 'full',
     allowSelectBy: true
 });
   

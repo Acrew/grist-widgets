@@ -9,7 +9,7 @@
         "url": "https://acrew.github.io/grist-widgets/clubs/index.html",
         "widgetId": "@plouezec/widget-clubs",
         "published": true,
-        "accessLevel": "read table",
+        "accessLevel": "full",
         "renderAfterReady": true,
         "description": "Facilite le traitement des données des associations.",
         "authors": [
