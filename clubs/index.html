@@ -9,56 +9,81 @@
 
     <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+    <script id="template-alert" type="x-tmpl-mustache">
+        <div class="alert alert-{{type}} alert-dismissible fade show" role="alert">
+            <p>{{message}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </script>
+    <script id="template-club" type="x-tmpl-mustache">
+        {{^record.RNA}}
+        <div class="container p-3" id="section-rna">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title fs-4">Code RNA</h2>
+                    <p>Cette association n'a pas de RNA. Merci de consulter le journal officiel et de le renseigner.</p>
+                    <p><a href="#" class="btn btn-secondary" target="_blank" id="btn-jo">Journal officiel</a></p>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="RNA" id="input-rna"/>
+                        <button class="btn btn-outline-primary" type="button" id="btn-rna">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/record.RNA}}
+
+        {{#record.RNA}}
+        <div class="container p-3">
+            <div class="card mb-3" id="association">
+                <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <h1 class="card-title fs-4">{{record.Nom}}</h1>
+                    <span class="badge text-bg-{{color}}">{{record.Categorie}}</span>
+                </div>
+                <p class="text-secondary">{{record.Description}}</p>
+                {{#record.Site}}<p><a class="btn btn-primary" href="{{record.Site}}" target="_blank"><i class="bi bi-globe-europe-africa"></i> Site web</a>{{/record.Site}}
+                {{#record.Courriel}}<a class="btn btn-primary" href="mailto:{{record.Courriel}}" target="_blank"><i class="bi bi-envelope-fill"></i> Courriel</a></p>{{/record.Courriel}}
+                </div>
+            </div>
+
+            <h3>Contacts</h3>
+            <div class="card mb-3" id="contacts">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        {{#record.Contacts}}<li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact{{id}}" type="button">{{Libelle}}</button>
+                        </li>{{/record.Contacts}}
+                    </ul>
+                </div>
+                <div class="card-body tab-content">
+                    {{#record.Contacts}}
+                    <div class="tab-pane fade" id="contact{{id}}">
+                        <h4>{{Libelle}}</h4>
+                        <ul class="list-group">
+                        {{#Data}}
+                            <li class="list-group-item"><span data-bs-toggle="tooltip" data-bs-title="Diffusable">{{#Publication_Web}}✔️{{/Publication_Web}}</span><span data-bs-toggle="tooltip" data-bs-title="Ne pas diffuser !">{{^Publication_Web}}⛔{{/Publication_Web}}</span> {{Type}} : {{Valeur}}</li>
+                        {{/Data}}
+                        </ul>
+                    </div>
+                    {{/record.Contacts}}
+                    {{^record.Contacts}}
+                    <p>Aucun contact n'est enregistré pour cette association</p>
+                    {{/record.Contacts}}
+                </div>
+            <div>
+        </div>
+        {{/record.RNA}}
+    </script>
 </head>
-<body>
-    <div class="container p-3" id="alert">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <p id="alert-message"></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+<body id="body">
+    <div class="container p-3" id="section-alerts">
+        
+    </div>
+    <div class="container p-3" id="section-association">
+        Chargement ...
     </div>
 
-    <div class="container p-3" id="section-droits">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <p>Cette vue a besoin d'accéder aux données des associations.<br/>
-            Veuillez activer les droits "Lire des données source sélectionnées" dans les options de la vue.</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-
-    <div class="container p-3" id="section-rna">
-        <div class="card">
-            <div class="card-body">
-            <h2 class="card-title fs-4">Code RNA</h2>
-            <p>Cette association n'a pas de RNA. Merci de consulter le journal officiel et de le renseigner.</p>
-            <p><a href="#" class="btn btn-secondary" target="_blank" id="btn-jo">Journal officiel</a></p>
-            <div class="input-group">
-                <input class="form-control" placeholder="RNA" id="input-rna"/>
-                <button class="btn btn-outline-primary" type="button" id="btn-rna">Valider</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container p-3"  id="section-asso">
-        <div class="card" id="card-asso">
-            <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start">
-                <h1 class="card-title fs-4" id="asso-nom">Association</h1>
-                <span class="badge text-bg-info" id="asso-categorie">Catégorie</span>
-            </div>
-            <p class="text-secondary" id="asso-description">Description</p>
-            <p><a class="btn btn-primary" href="#" target="_blank" id="asso-link-site"><i class="bi bi-globe-europe-africa"></i> Site web</a>
-            <a class="btn btn-primary" href="#" target="_blank" id="asso-link-email"><i class="bi bi-envelope-fill"></i> Courriel</a></p>
-            <p id="section-contacts">Contacts : <span id="asso-contacts"></span></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container p-3">
-        <pre id="debug"></pre>
-    </div>
-
-    <script src="index.js?v=0.0.2"></script>
+    <script src="index.js?v=0.1.0"></script>
 </body>
 </html>
