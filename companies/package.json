@@ -1,0 +1,25 @@
+{
+    "name": "@plouezec/widget-companies",
+    "description": "Facilite le traitement des données des entreprises.",
+    "homePage": "https://github.com/Acrew/grist-widgets",
+    "version": "0.0.1",
+    "grist": [
+      {
+        "name": "Entreprises",
+        "url": "https://acrew.github.io/grist-widgets/companies/index.html",
+        "widgetId": "@plouezec/widget-companies",
+        "published": true,
+        "accessLevel": "full",
+        "renderAfterReady": true,
+        "description": "Facilite le traitement des données des entreprises.",
+        "authors": [
+          {
+            "name": "Pierre Wellecan",
+            "url": "https://github.com/Acrew"
+          }
+        ],
+        "isGristLabsMaintained": false,
+        "lastUpdatedAt": "2025-01-03T11:12:00+01:00"
+      }
+    ]
+  }
