@@ -16,7 +16,9 @@ grist.onRecord(function(record) {
     Object.assign(record, record.API);
     
     const template = document.getElementById('template-club').innerHTML;
-    const rendered = Mustache.render(template, { record, color : function(){return getColor(record.Categorie)} });
+    const rendered = Mustache.render(template, { record,
+      'displayPhone' : function(){return this.match(/.{2}/g).join('.');},
+      color : function(){return getColor(record.Categorie)}  });
     document.getElementById('section-association').innerHTML = rendered;
 
     if(!record.RNA) {
