@@ -37,41 +37,36 @@
         <div class="container p-3">
             <div class="card mb-3" id="association">
                 <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                    <h1 class="card-title fs-4">{{record.Nom}}</h1>
-                    <span class="badge text-bg-{{color}}">{{record.Categorie}}</span>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h1 class="card-title fs-4">{{record.Nom}}</h1>
+                        <span class="badge text-bg-{{color}}">{{record.Categorie}}</span>
+                    </div>
+                    <span class="text-secondary">{{record.Description}}</span>
                 </div>
-                <p class="text-secondary">{{record.Description}}</p>
-                {{#record.Site}}<p><a class="btn btn-primary" href="{{record.Site}}" target="_blank"><i class="bi bi-globe-europe-africa"></i> Site web</a>{{/record.Site}}
-                {{#record.Courriel}}<a class="btn btn-primary" href="mailto:{{record.Courriel}}" target="_blank"><i class="bi bi-envelope-fill"></i> Courriel</a></p>{{/record.Courriel}}
-                </div>
-            </div>
-
-            <h3>Contacts</h3>
-            <div class="card mb-3" id="contacts">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         {{#record.Contacts}}<li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact{{id}}" type="button">{{Intitule}}</button>
+                            <button class="nav-link {{#firstTab}}active{{/firstTab}}" data-bs-toggle="tab" data-bs-target="#contact{{id}}" type="button">{{Intitule}}</button>
                         </li>{{/record.Contacts}}
                     </ul>
                 </div>
+                {{#record.Contacts}}
                 <div class="tab-content">
-                    {{#record.Contacts}}
-                    <ul class="tab-pane fade list-group list-group-flush" id="contact{{id}}">
+                    <ul class="tab-pane fade list-group list-group-flush {{#firstContent}}active show{{/firstContent}}" id="contact{{id}}">
                         <li class="list-group-item">{{#Intitule_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Intitule_web}}{{^Intitule_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Intitule_web}}{{Intitule}}</li>
-                {{#Fixe}}<li class="list-group-item">{{#Fixe_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Fixe_web}}{{^Fixe_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Fixe_web}}{{displayPhone}}</li>{{/Fixe}}
-                {{#Mobile}}<li class="list-group-item">{{#Mobile_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Mobile_web}}{{^Mobile_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Mobile_web}}{{displayPhone}}</li>{{/Mobile}}
-                {{#Adresse}}<li class="list-group-item">{{#Adresse_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Adresse_web}}{{^Adresse_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Adresse_web}}{{Adresse}}</li>{{/Adresse}}
-                {{#Courriel}}<li class="list-group-item">{{#Courriel_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Courriel_web}}{{^Courriel_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Courriel_web}}{{Courriel}}</li>{{/Courriel}}
-                {{#Lienweb}}<li class="list-group-item">{{#Lienweb_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Lienweb_web}}{{^Lienweb_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Lienweb_web}}<a href="{{Lienweb}}">{{Lienweb}}</a></li>{{/Lienweb}}
+                        {{#Fixe}}<li class="list-group-item">{{#Fixe_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Fixe_web}}{{^Fixe_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Fixe_web}}{{displayPhone}}</li>{{/Fixe}}
+                        {{#Mobile}}<li class="list-group-item">{{#Mobile_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Mobile_web}}{{^Mobile_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Mobile_web}}{{displayPhone}}</li>{{/Mobile}}
+                        {{#Adresse}}<li class="list-group-item">{{#Adresse_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Adresse_web}}{{^Adresse_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Adresse_web}}{{Adresse}}</li>{{/Adresse}}
+                        {{#Courriel}}<li class="list-group-item">{{#Courriel_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Courriel_web}}{{^Courriel_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Courriel_web}}{{Courriel}}</li>{{/Courriel}}
+                        {{#Lienweb}}<li class="list-group-item">{{#Lienweb_web}}<span data-bs-toggle="tooltip" title="Diffusable">✔️</span>{{/Lienweb_web}}{{^Lienweb_web}}<span data-bs-toggle="tooltip" title="Ne pas diffuser !">⛔</span>{{/Lienweb_web}}<a href="{{Lienweb}}">{{Lienweb}}</a></li>{{/Lienweb}}
                     </ul>
-                    {{/record.Contacts}}
-                    {{^record.Contacts}}
-                    <p>Aucun contact n'est enregistré pour cette association</p>
-                    {{/record.Contacts}}
                 </div>
-            <div>
+                {{/record.Contacts}}
+                <div class="card-footer">
+                    {{#record.Site}}<a class="btn btn-primary" href="{{record.Site}}" target="_blank"><i class="bi bi-globe-europe-africa"></i> Site web</a>{{/record.Site}}
+                    {{#record.Courriel}}<a class="btn btn-primary" href="mailto:{{record.Courriel}}" target="_blank"><i class="bi bi-envelope-fill"></i> Courriel</a>{{/record.Courriel}}
+                </div>
+            </div>
         </div>
         {{/record.RNA}}
     </script>

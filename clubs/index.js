@@ -14,11 +14,15 @@ grist.ready({
   
 grist.onRecord(function(record) {
     Object.assign(record, record.API);
+    let first = {'tab' : 0, 'content' : 0};
     
     const template = document.getElementById('template-club').innerHTML;
     const rendered = Mustache.render(template, { record,
       'displayPhone' : function(){return this.match(/.{2}/g).join('.');},
-      color : function(){return getColor(record.Categorie)}  });
+      'color' : function(){return getColor(record.Categorie)},
+      'firstTab' : function(){first['tab']++; return (first['tab']==1);},
+      'firstContent' : function(){first['content']++; return (first['content']==1);}
+    });
     document.getElementById('section-association').innerHTML = rendered;
 
     if(!record.RNA) {
