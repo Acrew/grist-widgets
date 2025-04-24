@@ -21,7 +21,8 @@ grist.onRecord(function(record) {
       'displayPhone' : function(){return this.match(/.{2}/g).join('.');},
       'color' : function(){return getColor(record.Categorie)},
       'firstTab' : function(){first['tab']++; return (first['tab']==1);},
-      'firstContent' : function(){first['content']++; return (first['content']==1);}
+      'firstContent' : function(){first['content']++; return (first['content']==1);},
+      'contactsExists' : function(){return (record.Contacts !== null);}
     });
     document.getElementById('section-association').innerHTML = rendered;
 

@@ -43,6 +43,7 @@
                     </div>
                     <span class="text-secondary">{{record.Description}}</span>
                 </div>
+                {{#contactsExists}}
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         {{#record.Contacts}}<li class="nav-item">
@@ -62,6 +63,7 @@
                     </ul>
                 </div>
                 {{/record.Contacts}}
+                {{/contactsExists}}
                 <div class="card-footer">
                     {{#record.Site}}<a class="btn btn-primary" href="{{record.Site}}" target="_blank"><i class="bi bi-globe-europe-africa"></i> Site web</a>{{/record.Site}}
                     {{#record.Courriel}}<a class="btn btn-primary" href="mailto:{{record.Courriel}}" target="_blank"><i class="bi bi-envelope-fill"></i> Courriel</a>{{/record.Courriel}}
