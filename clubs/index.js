@@ -35,16 +35,6 @@ grist.onRecord(function(record) {
       });
     }
 });
-  
-function getColor(text) {
-    const colors = {
-      'patriotique': 'danger',
-      'sportive': 'success',
-      'culturelle': 'info',
-      'diverse': 'warning'
-    };
-    return colors[text.toLowerCase()] || 'primary';
-}
 
 function alert(message, type) {
   const types = {
