@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('section-alerts').style.display = 'none';
   if (!window.grist) {
-    alert("Cette vue nécessite Grist pour fonctionner");
+    document.getElementById('section').innerHTML = "Cette vue nécessite Grist pour fonctionner";
   }
   const Mustache = require('mustache');
 });
@@ -24,7 +23,7 @@ grist.onRecord(function(record) {
       'firstContent' : function(){first['content']++; return (first['content']==1);},
       'contactsExists' : function(){return (record.Contacts !== null);}
     });
-    document.getElementById('section-association').innerHTML = rendered;
+    document.getElementById('section').innerHTML = rendered;
 
     if(!record.RNA) {
       document.getElementById("btn-jo").setAttribute('href','https://www.journal-officiel.gouv.fr/pages/associations-recherche/?disjunctive.source&sort=cronosort&q=' + record.Nom);
@@ -35,22 +34,6 @@ grist.onRecord(function(record) {
       });
     }
 });
-
-function alert(message, type) {
-  const types = {
-    'danger': 'danger',
-    'success': 'success',
-    'info': 'info',
-    'warning': 'warning'
-  };
-  type = types[type.toLowerCase()] || 'danger';
-
-  let alerts = document.getElementById('section-alerts').innerHTML;
-  document.getElementById('section-alerts').style.display = 'block';
-  const template = document.getElementById('template-alert').innerHTML;
-  const rendered = Mustache.render(template, { message, type });
-  document.getElementById('section-alerts').innerHTML = alerts + rendered;
-}
 
 function updateRecord(record, data) {
     grist

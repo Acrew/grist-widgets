@@ -10,12 +10,6 @@
     <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
-    <script id="template-alert" type="x-tmpl-mustache">
-        <div class="alert alert-{{type}} alert-dismissible fade show" role="alert">
-            <p>{{message}}</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </script>
     <script id="template-club" type="x-tmpl-mustache">
         {{^record.RNA}}
         <div class="container p-3" id="section-rna">
@@ -74,10 +68,7 @@
     </script>
 </head>
 <body id="body">
-    <div class="container p-3" id="section-alerts">
-        
-    </div>
-    <div class="container p-3" id="section-association">
+    <div class="container p-3" id="section">
         Chargement ...
     </div>
 
